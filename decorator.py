@@ -32,13 +32,19 @@ class Website:
         self.PREMIUM_USERS.update({user.username: user})
         print('premium user activated for', user.username)
 
-    @authorization_required
+    @property
     def premium_content(self):
-        return 'Welcome to the premium content'
+        content = ['premium_content1', 'premium_content2', 'premium_content3']
+        return content
+
+
+@authorization_required
+def show_premium_content(web: Website):
+    for i in web.premium_content:
+        print(i)
 
 
 if __name__ == '__main__':
     web = Website()
-    print(web.premium_content())
-    web.activate_premium('Anonymous', 'Anonymous', 'Anonymous')
-    print(web.premium_content())
+    web.activate_premium('Ali', 'Ali1234', 'Ali4321')
+    show_premium_content(web)
